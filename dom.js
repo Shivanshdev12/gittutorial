@@ -30,9 +30,36 @@
 //   items[i].style.fontWeight = "bold";
 // }
 
-var li = document.getElementsByTagName("li");
-for (var i = 0; i < li.length; i++) {
-  li[i].style.backgroundColor = "#f4f4f4";
-}
+// var li = document.getElementsByTagName("li");
+// for (var i = 0; i < li.length; i++) {
+//   li[i].style.backgroundColor = "#f4f4f4";
+// }
 
-li[4].classList.add("list-group-item");
+// li[4].classList.add("list-group-item");
+
+//QuerySelector
+
+var header = document.querySelector("#main-header");
+header.getElementsByClassName.borderBottom = "solid 4px #ccc";
+
+var input = document.querySelector("input");
+input.value = "Hello World!";
+
+var submit = document.querySelector('input[type="submit"]');
+submit.value = "SEND";
+
+var item = document.querySelector(".list-group-item");
+item.style.color = "red";
+
+var lastItem = document.querySelector(".list-group-item:last-child");
+lastItem.style.color = "blue";
+
+var secondItem = document.querySelector(".list-group-item:nth-child(2)");
+secondItem.style.color = "blue";
+
+//second item having green background
+secondItem.style.backgroundColor = "green";
+
+//third item invisible
+var thirdItem = document.querySelector(".list-group-item:nth-child(3)");
+thirdItem.style.display = "none";
