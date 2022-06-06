@@ -1,76 +1,68 @@
-// console.log(document.domain);
-// console.log(document.URL);
-// console.log(document.activeElement);
+//Traversing in THE DOM
+// var itemList = document.querySelector("#items");
+// // //parentNodeconsole.log(itemList.parentNode);
+// // itemList.parentNode.style.backgroundColor = "#f4f4f4";
 
-// var headerTitle = document.getElementById("header-title");
-// var header = document.getElementById("main-header");
-// console.log(headerTitle);
-// header.style.borderBottom = "solid 3px #000";
+// //parentElement
+// // console.log(itemList.parentElement);
+// // itemList.parentElement.style.backgroundColor = "#f4f4f4";
 
-// var addItems = document.querySelector(".title");
-// addItems.innerHTML = "<B>Add Items</B>";
-// addItems.style.color = "green";
-// console.log(addItems);
+// //childNodes
+// console.log(itemList.childNodes);
 
-// var items = document.getElementsByClassName("list-group-item");
-// console.log(items);
-// console.log(items[1]);
-// items[1].textContent = "Hello 2";
-// items[1].style.fontWeight = "bold";
-// items[1].style.backgroundColor = "yellow";
+// //children
+// console.log(itemList.children);
+// itemList.children[1].style.backgroundColor = "yellow";
 
-// for (var i = 0; i < items.length; i++) {
-//   items[i].style.backgroundColor = "#f4f4f4";
-// }
+// //firstchild
+// console.log(itemList.firstChild);
+// itemList.firstElementChild.textContent = "Hello";
 
-// //third element in list - green bg
-// items[2].style.backgroundColor = "green";
+// //lastChild
+// itemList.lastElementChild.textContent = "Hello";
 
-// for (var i = 0; i < items.length; i++) {
-//   items[i].style.fontWeight = "bold";
-// }
+// //siblings
+// console.log(itemList.nextSibling);
 
-// var li = document.getElementsByTagName("li");
-// for (var i = 0; i < li.length; i++) {
-//   li[i].style.backgroundColor = "#f4f4f4";
-// }
+// //previous siblings
+// console.log(itemList.previousSibling);
+// console.log(itemList.previousElementSibling);
 
-// li[4].classList.add("list-group-item");
+// //create div
+// var newDiv = document.createElement("div");
 
-//QuerySelector
+// newDiv.className = "hello";
 
-// var header = document.querySelector("#main-header");
-// header.getElementsByClassName.borderBottom = "solid 4px #ccc";
+// newDiv.id = "hello1";
 
-// var input = document.querySelector("input");
-// input.value = "Hello World!";
+// newDiv.setAttribute("title", "Hello Div");
 
-// var submit = document.querySelector('input[type="submit"]');
-// submit.value = "SEND";
+// var newDivText = document.createTextNode("Hello World");
 
-// var item = document.querySelector(".list-group-item");
-// item.style.color = "red";
+// newDiv.appendChild(newDivText);
 
-// var lastItem = document.querySelector(".list-group-item:last-child");
-// lastItem.style.color = "blue";
+// console.log(newDiv);
 
-// var secondItem = document.querySelector(".list-group-item:nth-child(2)");
-// secondItem.style.color = "blue";
+// var container = document.querySelector("header .container");
+// var h1 = document.querySelector("header h1");
 
-//second item having green background
-// secondItem.style.backgroundColor = "green";
+// newDiv.style.fontSize = "30px";
 
-//third item invisible
-// var thirdItem = document.querySelector(".list-group-item:nth-child(3)");
-// thirdItem.style.display = "none";
+// container.insertBefore(newDiv, h1);
 
-//QuerySelectorAll
-var items = document.querySelectorAll(".list-group-item");
-// console.log(items);
-items[1].style.color = "green";
+const container = document.querySelector(".container"); //parent
+const title = document.getElementById("header-title"); //sibling
+const newNode = document.createElement("h1"); //newNode
+const textNode = document.createTextNode("Hello");
+newNode.appendChild(textNode);
 
-var odd = document.querySelectorAll(".list-group-item:nth-child(odd)");
+container.insertBefore(newNode, title);
 
-for (var i = 0; i < odd.length; i++) {
-  odd[i].style.backgroundColor = "green";
-}
+const items = document.querySelector("#items");
+const newItem = document.createElement("li");
+const textItem = document.createTextNode("Hello");
+newItem.appendChild(textItem);
+
+newItem.className = "list-group-item";
+
+items.insertBefore(newItem, items.children[0]);
