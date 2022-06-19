@@ -73,10 +73,8 @@ createPost({
 })
   .then(getPosts)
   .then(deletePost)
-  .then(deletePost)
-  .then(deletePost)
   .catch((err) => {
-    console.log(err, "Array is empty now");
+    console.log(err);
   });
 
 // deletePost()
