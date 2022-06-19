@@ -53,6 +53,20 @@ function deletePost() {
       } else {
         reject("Error: Array is Empty!");
       }
+    }, 5000);
+  });
+}
+
+const user = {
+  username: "Shivansh",
+  lastactivitytime: "",
+};
+
+function updateLastActivityTime() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      user.lastactivitytime = new Date().toLocaleTimeString();
+      resolve(user.lastactivitytime);
     }, 1000);
   });
 }
@@ -62,30 +76,40 @@ createPost({
   body: "This is post three",
 })
   .then(getPosts)
+  // .then(deletePost)
   .catch((err) => {
     console.log(err);
   });
 
-deletePost()
-  .then(getPosts)
-  .catch((err) => {
-    console.log(err);
-  });
+// deletePost()
+//   .then(getPosts)
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
-deletePost()
-  .then(getPosts)
-  .catch((err) => {
-    console.log(err);
-  });
+const p1 = Promise.resolve("Hello World");
+const p2 = 10;
+const p3 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 2000, "Goodbye");
+});
 
-deletePost()
-  .then(getPosts)
-  .catch((err) => {
-    console.log(err);
-  });
+// Promise.all([p1, p2, p3]).then((values) => console.log(values));
 
-deletePost()
-  .then(getPosts)
+const promisePost = createPost({
+  title: "Post Four",
+  body: "This is post Four",
+});
+
+const lastActive = updateLastActivityTime();
+Promise.all([promisePost, lastActive])
+  .then(() => {
+    console.log(posts);
+    console.log(user.lastactivitytime);
+  })
+  .then(deletePost)
+  .then(() => {
+    console.log("New set of posts:", posts);
+  })
   .catch((err) => {
     console.log(err);
   });
