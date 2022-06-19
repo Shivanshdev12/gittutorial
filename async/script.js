@@ -26,33 +26,61 @@ function getPosts() {
 }
 
 function createPost(post, callback) {
-  setTimeout(() => {
-    posts.push({
-      ...post,
-      createdAt: new Date().getTime(),
-    });
-    callback();
-  }, 1000);
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      posts.push({ ...post, createdAt: new Date().getTime() });
+      const error = false;
+      if (!error) {
+        resolve();
+      } else {
+        reject("Error : Something went wrong!");
+      }
+    }, 1000);
+  });
 }
 
-function create4thPost(post, callback) {
-  setTimeout(() => {
-    callback(post, getPosts);
-  }, 1000);
+function deletePost() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      posts.pop();
+      const error = false;
+      if (!error) {
+        resolve();
+      } else {
+        reject("Error: Something went wrong!");
+      }
+    }, 1000);
+  });
 }
 
-create4thPost(
-  {
-    title: "Post Four",
-    body: "This is post four",
-  },
-  createPost
-);
+// function create4thPost(post, callback) {
+//   setTimeout(() => {
+//     callback(post, getPosts);
+//   }, 1000);
+// }
 
-createPost(
-  {
-    title: "Post Three",
-    body: "This is post three",
-  },
-  getPosts
-);
+// create4thPost(
+//   {
+//     title: "Post Four",
+//     body: "This is post four",
+//   },
+//   createPost
+// );
+
+createPost({
+  title: "Post Three",
+  body: "This is post three",
+})
+  .then(getPosts)
+  .then(deletePost)
+  .then(deletePost)
+  .then(deletePost)
+  .catch((err) => {
+    console.log(err, "Array is empty now");
+  });
+
+// deletePost()
+//   .then(getPosts)
+//   .catch((err) => {
+//     console.log(err);
+//   });
