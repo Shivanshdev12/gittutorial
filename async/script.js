@@ -31,7 +31,7 @@ function createPost(post) {
       posts.push({ ...post, createdAt: new Date().getTime() });
       const error = false;
       if (!error) {
-        resolve();
+        resolve("Post added successfully");
       } else {
         reject("Error : Something went wrong!");
       }
@@ -49,7 +49,7 @@ function deletePost() {
         error = true;
       }
       if (!error) {
-        resolve();
+        resolve("Post deleted successfully");
       } else {
         reject("Error: Array is Empty!");
       }
@@ -71,15 +71,15 @@ function updateLastActivityTime() {
   });
 }
 
-createPost({
-  title: "Post Three",
-  body: "This is post three",
-})
-  .then(getPosts)
-  // .then(deletePost)
-  .catch((err) => {
-    console.log(err);
-  });
+// createPost({
+//   title: "Post Three",
+//   body: "This is post three",
+// })
+//   .then(getPosts)
+//   // .then(deletePost)
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
 // deletePost()
 //   .then(getPosts)
@@ -87,29 +87,54 @@ createPost({
 //     console.log(err);
 //   });
 
-const p1 = Promise.resolve("Hello World");
-const p2 = 10;
-const p3 = new Promise((resolve, reject) => {
-  setTimeout(resolve, 2000, "Goodbye");
-});
+// const p1 = Promise.resolve("Hello World");
+// const p2 = 10;
+// const p3 = new Promise((resolve, reject) => {
+//   setTimeout(resolve, 2000, "Goodbye");
+// });
 
 // Promise.all([p1, p2, p3]).then((values) => console.log(values));
 
-const promisePost = createPost({
-  title: "Post Four",
-  body: "This is post Four",
-});
+// const promisePost = createPost({
+//   title: "Post Four",
+//   body: "This is post Four",
+// });
 
-const lastActive = updateLastActivityTime();
-Promise.all([promisePost, lastActive])
-  .then(() => {
-    console.log(posts);
-    console.log(user.lastactivitytime);
-  })
-  .then(deletePost)
-  .then(() => {
-    console.log("New set of posts:", posts);
-  })
-  .catch((err) => {
-    console.log(err);
+// const lastActive = updateLastActivityTime();
+// Promise.all([promisePost, lastActive])
+//   .then(() => {
+//     console.log(posts);
+//     console.log(user.lastactivitytime);
+//   })
+//   .then(deletePost)
+//   .then(() => {
+//     console.log("New set of posts:", posts);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+
+async function doPost() {
+  const response = await createPost({
+    title: "Post Three",
+    body: "This is post three",
   });
+  console.log(response);
+  getPosts();
+  const deleteresponse = await deletePost();
+  console.log(deleteresponse);
+}
+
+async function lastactivity() {
+  const response = await Promise.all([
+    createPost({ title: "Post Four", body: "This is post Four" }),
+    updateLastActivityTime(),
+  ]);
+  console.log(response);
+  const deleteresponse = await deletePost();
+  console.log(deleteresponse);
+  console.log("New set of posts", posts);
+}
+
+doPost();
+lastactivity();
